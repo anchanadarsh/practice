@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class User {
+            constructor(name, email) {
+                this.name = name;
+                this.email = email;
+            }
+            login() {
+                console.log(`${this.name} has logged in`)
+            }
+            logout() {
+                console.log(`${this.name} has logged out`)
+            }
+        }
+
+        class Admin extends User {
+            deleteUser(user) {
+                users = users.filter(u => {
+                    return u.email != user.email;
+                })
+            }
+        }
+
+        var userOne = new User('adarsh', 'adarsh@gmail.com');
+        var userTwo = new User('anchan', 'anchan@gmail.com');
+        var admin = new Admin('john', 'john@gmail.com');
+
+        var users = [userOne, userTwo, admin];
+
+        console.log(admin);
+        console.log(users);
+
+        admin.deleteUser(userOne);
+
+        console.log(users);
+
+    </script>
+</body>
+
+</html>
