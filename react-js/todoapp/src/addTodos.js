@@ -11,15 +11,19 @@ class AddTodo extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
+        this.props.addTodoP(this.state);
+        this.setState({
+            content: ''
+        })
     }
     render() {
         return (
             <div>
-                <form className="">
+                <form className="" onSubmit={this.handleSubmit}>
                     <div className="input-field">
                         <span className="helper-text" data-error="wrong" data-success="right">Add Todos</span>
-                        <input id="email" type="email" className="validate" onChange={this.handleChange} />
-                        <button className="waves-effect waves-light btn" onClick={this.handleSubmit}>submit</button>
+                        <input id="todo_text" type="text" className="validate" onChange={this.handleChange} value={this.state.content}/>
+                        <button type="submit" className="waves-effect waves-light btn">submit</button>
                     </div>
                 </form>
             </div>

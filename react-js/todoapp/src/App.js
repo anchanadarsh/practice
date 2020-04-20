@@ -25,12 +25,20 @@ class App extends Component {
     })
   }
 
+  addTodo = (todo) => {
+    todo.id = Math.random();
+    let todos = [...this.state.todos, todo]
+    this.setState({
+      todos: todos
+    })
+  }
+
   render() {
     return (
       <div className="App container" >
         <h2 className="center blue-text">Todos</h2>
         <Todos todosP={this.state.todos} deleteTodoP={this.deleteTodo} />
-        <AddTodo/>
+        <AddTodo addTodoP={this.addTodo} />
       </div>
     )
   }
