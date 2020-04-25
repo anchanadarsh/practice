@@ -1,0 +1,44 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  --ting_color_yellow: #fae90c; }
+
+.page_title {
+  font-size: 36px;
+  padding-left: 15px; }
+
+#dashboard_page {
+  background-color: black;
+  min-height: 100vh;
+  color: white;
+  padding: 15px 0px; }
+  #dashboard_page .dashboard_area {
+    display: flex;
+    flex-wrap: wrap; }
+    #dashboard_page .dashboard_area .dashboard_item {
+      width: 33.33%;
+      padding: 15px; }
+      @media (max-width: 991px) {
+        #dashboard_page .dashboard_area .dashboard_item {
+          width: 50%; } }
+      @media (max-width: 767px) {
+        #dashboard_page .dashboard_area .dashboard_item {
+          width: 100%; } }
+      #dashboard_page .dashboard_area .dashboard_item .card {
+        background-color: var(--ting_color_yellow);
+        color: black;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        height: 100%; }
+        #dashboard_page .dashboard_area .dashboard_item .card .card-content .card-title {
+          font-weight: 600; }
+        #dashboard_page .dashboard_area .dashboard_item .card .card-action {
+          border-top: 1px solid rgba(0, 0, 0, 0.41);
+          margin-top: auto; }
+          #dashboard_page .dashboard_area .dashboard_item .card .card-action a {
+            color: black; }
+            #dashboard_page .dashboard_area .dashboard_item .card .card-action a:hover {
+              color: black; }
+
+/*# sourceMappingURL=style.css.map */
