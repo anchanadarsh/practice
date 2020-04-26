@@ -6,12 +6,14 @@
 	<title>device orientation js</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<style>
-		body{
+		body {
 			margin: 0;
 			padding: 0;
 			background-image: url(galaxy.jpg);
 			background-size: cover;
+			color: white;
 		}
+
 		.box_area {
 			display: flex;
 			justify-content: center;
@@ -29,6 +31,7 @@
 			justify-content: center;
 			align-items: center;
 			background-color: white;
+			color: black;
 		}
 
 	</style>
@@ -40,33 +43,36 @@
 		<p id="doeSupported"></p>
 	</div>
 
-<!--
-	<h2>rotationRate_alpha: <span id="rotationRate_alpha"></span></h2>
-	<h2>rotationRate_beta: <span id="rotationRate_beta"></span></h2>
-	<h2>rotationRate_gamma: <span id="rotationRate_gamma"></span></h2>
-	
-	<h2>interval: <span id="interval"></span></h2>
--->
+	<h2>alpha: <span id="alpha"></span></h2>
+	<h2>beta: <span id="beta"></span></h2>
+	<h2>gamma: <span id="gamma"></span></h2>
 
-	
+
 
 	<script>
-		if (window.DeviceMotionEvent) {
+		if (window.DeviceOrientationEvent) {
 			var targetBox = document.getElementById("doeSupported");
-			var targetInterval = document.getElementById("interval");
-			var targetRotationRate_alpha = document.getElementById("rotationRate_alpha");
-			var targetRotationRate_beta = document.getElementById("rotationRate_beta");
-			var targetRotationRate_gamma = document.getElementById("rotationRate_gamma");
+			var alpha = document.getElementById("alpha");
+			var beta = document.getElementById("beta");
+			var gamma = document.getElementById("gamma");
+			var absolute = document.getElementById("absolute");
 
 			targetBox.innerText = "Supported!";
-			targetBox.style.transform = "rotateX(0) rotateY(45deg) rotateZ(0)";
 
-			window.addEventListener('devicemotion', function(e) {
 
-				targetBox.style.transform = 
-					`rotateX(${(e.rotationRate.alpha).toFixed(0)}deg)
-					 rotateY(${(e.rotationRate.beta).toFixed(0)}deg) 
-					 rotateZ(${(e.rotationRate.gamma).toFixed(0)}deg)`;
+
+			targetBox.style.transform = "rotateX(0) rotateY(0deg) rotateZ(0)";
+
+			window.addEventListener('deviceorientation', function(e) {
+
+				alpha.innerText = (e.alpha).toFixed(0);
+				beta.innerText = (e.beta).toFixed(0);
+				gamma.innerText = (e.gamma).toFixed(0);
+
+				targetBox.style.transform =
+					`rotateX(${(e.alpha).toFixed(0)}deg)
+					 rotateY(${(e.beta).toFixed(0)}deg) 
+					 rotateZ(${(e.gamma).toFixed(0)}deg)`;
 			});
 		} else {
 			document.getElementById("doeSupported").innerText = "Not Supported!";

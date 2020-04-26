@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>device orientation js</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		body{
+			margin: 0;
+			padding: 0;
+			background-image: url(galaxy.jpg);
+			background-size: cover;
+		}
+		.box_area {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			height: 50vh;
+			margin-bottom: 30px;
+			perspective: 1000px;
+		}
+
+		#doeSupported {
+			width: 100px;
+			height: 100px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background-color: white;
+		}
+
+	</style>
+</head>
+
+<body>
+
+	<div class="box_area">
+		<p id="doeSupported"></p>
+	</div>
+
+<!--
+	<h2>rotationRate_alpha: <span id="rotationRate_alpha"></span></h2>
+	<h2>rotationRate_beta: <span id="rotationRate_beta"></span></h2>
+	<h2>rotationRate_gamma: <span id="rotationRate_gamma"></span></h2>
+	
+	<h2>interval: <span id="interval"></span></h2>
+-->
+
+	
+
+	<script>
+		if (window.DeviceMotionEvent) {
+			var targetBox = document.getElementById("doeSupported");
+			var targetInterval = document.getElementById("interval");
+			var targetRotationRate_alpha = document.getElementById("rotationRate_alpha");
+			var targetRotationRate_beta = document.getElementById("rotationRate_beta");
+			var targetRotationRate_gamma = document.getElementById("rotationRate_gamma");
+
+			targetBox.innerText = "Supported!";
+			targetBox.style.transform = "rotateX(0) rotateY(45deg) rotateZ(0)";
+
+			window.addEventListener('devicemotion', function(e) {
+
+				targetBox.style.transform = 
+					`rotateX(${(e.rotationRate.alpha).toFixed(0)}deg)
+					 rotateY(${(e.rotationRate.beta).toFixed(0)}deg) 
+					 rotateZ(${(e.rotationRate.gamma).toFixed(0)}deg)`;
+			});
+		} else {
+			document.getElementById("doeSupported").innerText = "Not Supported!";
+		}
+
+	</script>
+</body>
+
+</html>
