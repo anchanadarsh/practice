@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        class Square {
+            constructor(_width) {
+                this.width = _width;
+                this.height = _width;
+            }
+            area = () => {
+                return this.width * this.height;
+            }
+        }
+
+        let square1 = new Square(10);
+        console.log(square1);
+        console.log(square1.area());
+
+    </script>
+
+</body>
+
+</html>
