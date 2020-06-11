@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Image effects</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="container image_effect_area">
+        <div class="image_effect_area_inner">
+            <div class="upload_and_change_effect">
+                <div class="upload_image_area">
+                    <input class="image_upload" type="file">
+                </div>
+                <div class="change_effect_area">
+                    <select class="change_image_effect">
+                        <option value="">Select Effects</option>
+                        <option value="pencil-effect">pencil-effect</option>
+                        <option value="emboss-effect">emboss-effect</option>
+                        <option value="colored-pencil-effect">colored-pencil-effect</option>
+                        <option value="watercolor-effect">watercolor-effect</option>
+                        <option value="colored-chalkboard-effect">colored-chalkboard-effect</option>
+                        <option value="chalkboard-effect">chalkboard-effect</option>
+                        <option value="flannel-effect">flannel-effect</option>
+                        <option value="hallucination-effect">hallucination-effect</option>
+                        <option value="airbrush-effect">airbrush-effect</option>
+                        <option value="low-ink-y-effect">low-ink-y-effect</option>
+                        <option value="collage-effect">collage-effect</option>
+                        <option value="low-ink-x-effect">low-ink-x-effect</option>
+                        <option value="photo-border-effect">photo-border-effect</option>
+                        <option value="collage-effect">collage-effect</option>
+                        <option value="mosaic-effect">mosaic-effect</option>
+                        <option value="warhol-effect">warhol-effect</option>
+                        <option value="infrared-effect">infrared-effect</option>
+                        <option value="night-vision-effect">night-vision-effect</option>
+                        <option value="mirror-y-effect">mirror-y-effect</option>
+                        <option value="selective-color-effect">selective-color-effect</option>
+                        <option value="mirror-x-effect">mirror-x-effect</option>
+                    </select>
+                </div>
+            </div>
+            <div id="image_effect" class="">
+                <img width="" height="" src="photo.jpg" alt="">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            function viewUploadedImage(input, _target) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        $(_target).attr('src', e.target.result);
+                        console.log(e.target.result);
+                        document.documentElement.style.setProperty('--url', 'url(' + e.target.result + ')');
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            //change image on upload
+            $('.image_upload').on('change', function() {
+                viewUploadedImage(this, '#image_effect img');
+            })
+
+            //change effect
+            $('.change_image_effect').on('change', function() {
+                var getClass = $(this).val();
+                if (getClass) {
+                    $('#image_effect').attr('class', '');
+                    $('#image_effect img').addClass('hide_image');
+                    $('#image_effect').addClass(getClass);
+                } else {
+                    $('#image_effect').attr('class', '');
+                    $('#image_effect img').removeClass('hide_image');
+                }
+
+            })
+        })
+
+    </script>
+</body>
+
+</html>
