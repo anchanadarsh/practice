@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>scroll progress</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <section id="one">
+        <span>1</span>
+    </section>
+    <!--
+    <section id="two"></section>
+    <section id="three"></section>
+-->
+    <script src="jquery-1.11.2.min.js"></script>
+
+    <script>
+        var winH = $(window).outerHeight();
+        var scrollSpeed = 20;
+        var noOfImages = 900;
+        var scrollArea = scrollSpeed * noOfImages;
+
+        $('#one').wrap('<div class="fixed_wrap"></div>');
+        $('.fixed_wrap').css({
+            height: scrollArea + 'px',
+        })
+
+        $(window).scroll(function() {
+            var scrollTopPos = $(window).scrollTop();
+            var scrollProgress = (scrollTopPos / (scrollArea - winH)) * 100;
+            $('#one span').text((scrollProgress).toFixed(0))
+        })
+
+    </script>
+
+</body>
+
+</html>
