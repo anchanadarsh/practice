@@ -10,12 +10,18 @@
             margin: 0;
             display: flex;
             align-items: center;
-            justify-content: center;
+            /*            justify-content: center;*/
         }
 
         #drawing_box {
             width: 50vw;
             height: 30vw;
+        }
+
+        .paint-canvas {
+            border: 1px black solid;
+            display: block;
+            margin: 1rem;
         }
 
     </style>
@@ -24,161 +30,123 @@
 
 <body>
 
-    <div id="drawing_box">
+    <canvas class="js-paint paint-canvas" width="600" height="300"></canvas>
 
-    </div>
+    <button id="download_canvas">download</button>
 
-
-
-    <script src="https://two.js.org/third-party/url.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="two.js"></script>
 
     <script>
         $(function() {
 
-            createGrid();
+            const paintCanvas = document.querySelector('.js-paint');
+            const context = paintCanvas.getContext('2d');
+            context.lineCap = 'round';
+            context.lineWidth = 50;
+            context.fillStyle = "#ff0000";
+            context.fillRect(0, 0, paintCanvas.width, paintCanvas.height);
+            context.strokeStyle = "#fff";
 
-            var getCanvasBox = document.getElementById('drawing_box');
+            var canvasIsFilled = false;
 
-            var type = /(canvas|webgl)/.test(url.type) ? url.type : 'svg';
-            var two = new Two({
-                type: Two.Types[type],
-                fullscreen: false,
-                autostart: true,
-                width: '100%',
-                height: '100%'
-            }).appendTo(getCanvasBox);
+            function rgbToHex(r, g, b) {
+                if (r > 255 || g > 255 || b > 255)
+                    throw "Invalid color component";
+                return ((r << 16) | (g << 8) | b).toString(16);
+            }
 
-            var x, y, line, mouse = new Two.Vector(),
-                randomness = 0;
+            let x = 0,
+                y = 0;
+            let isMouseDown = false;
+            let isTouchDown = false;
 
-            var randomColor = ['#fff']
-            var currentColorIndex = 0;
-
-            var drag = function(e) {
-                console.log(e);
-                x = e.clientX;
-                y = e.clientY;
-                if (!line) {
-                    var v1 = makePoint(mouse);
-                    var v2 = makePoint(x, y);
-                    line = two.makeCurve([v1, v2], true);
-                    line.noFill().stroke = randomColor[currentColorIndex];
-                    line.linewidth = 30;
-                    line.cap = 'round';
-                    line.vertices.forEach(function(v) {
-                        v.addSelf(line.translation);
-                    });
-                    line.translation.clear();
-                } else {
-                    var v1 = makePoint(x, y);
-                    line.vertices.push(v1);
-                }
-                mouse.set(x, y);
-            };
-
-            var dragEnd = function(e) {
-                $('#drawing_box')
-                    .unbind('mousemove', drag)
-                    .unbind('mouseup', dragEnd);
-                if (currentColorIndex == (randomColor.length - 1)) {
-                    currentColorIndex = 0
-                } else {
-                    currentColorIndex++;
-                }
-            };
-
-            var touchDrag = function(e) {
-                e.preventDefault();
-                var touch = e.originalEvent.changedTouches[0];
-                drag({
-                    clientX: touch.pageX,
-                    clientY: touch.pageY
-                });
-                return false;
-            };
-
-            var touchEnd = function(e) {
-                e.preventDefault();
-                $('#drawing_box')
-                    .unbind('touchmove', touchDrag)
-                    .unbind('touchend', touchEnd);
-                if (currentColorIndex == (randomColor.length - 1)) {
-                    currentColorIndex = 0
-                } else {
-                    currentColorIndex++;
-                }
-                return false;
-            };
-
-            $('#drawing_box')
-                .bind('mousedown', function(e) {
-                    mouse.set(e.clientX, e.clientY);
-                    line = null;
-                    $('#drawing_box')
-                        .bind('mousemove', drag)
-                        .bind('mouseup', dragEnd);
-                })
-                .bind('touchstart', function(e) {
-                    e.preventDefault();
-                    var touch = e.originalEvent.changedTouches[0];
-                    mouse.set(touch.pageX, touch.pageY);
-                    line = null;
-                    $('#drawing_box')
-                        .bind('touchmove', touchDrag)
-                        .bind('touchend', touchEnd);
-                    return false;
-                });
-
-            two.bind('update', function(frameCount, timeDelta) {
-                two.scene.children.forEach(function(child) {
-                    child.vertices.forEach(function(v) {
-                        if (!v.position) {
-                            return;
+            const stopDrawing = () => {
+                isMouseDown = false;
+                for (var i = 0; i <= paintCanvas.height; i++) {
+                    for (var j = 0; j <= paintCanvas.width; j++) {
+                        var p = context.getImageData(j, i, 1, 1).data;
+                        var hex = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
+                        if (hex == '#ff0000') {
+                            canvasIsFilled = false;
                         }
-                        v.x = v.position.x + (Math.random() * randomness - randomness / 2);
-                        v.y = v.position.y + (Math.random() * randomness - randomness / 2);
-                    });
-                });
+                    }
+                }
+                if (!canvasIsFilled) {
+                    console.log('canvas is filled');
+                }
+
+            }
+            const startDrawing = event => {
+                isMouseDown = true;
+                [x, y] = [event.offsetX, event.offsetY];
+                console.log()
+            }
+            const drawLine = event => {
+                if (isMouseDown) {
+                    const newX = event.offsetX;
+                    const newY = event.offsetY;
+                    context.beginPath();
+                    context.moveTo(x, y);
+                    context.lineTo(newX, newY);
+                    context.stroke();
+                    //[x, y] = [newX, newY];
+                    x = newX;
+                    y = newY;
+                }
+            }
+
+            const stopTouchDrawing = () => {
+                isTouchDown = false;
+            }
+            const startTouchDrawing = event => {
+                console.log(event)
+                isTouchDown = true;
+                var touch = event.changedTouches[0];
+                [x, y] = [touch.pageX, touch.pageY];
+            }
+            const drawTouchLine = event => {
+                if (isTouchDown) {
+                    var touch = event.changedTouches[0];
+                    const newX = touch.pageX;
+                    const newY = touch.pageY;
+                    context.beginPath();
+                    context.moveTo(x, y);
+                    context.lineTo(newX, newY);
+                    context.stroke();
+                    //[x, y] = [newX, newY];
+                    x = newX;
+                    y = newY;
+                }
+            }
+
+            paintCanvas.addEventListener('mousedown', startDrawing);
+            paintCanvas.addEventListener('mousemove', drawLine);
+            paintCanvas.addEventListener('mouseup', stopDrawing);
+            paintCanvas.addEventListener('mouseout', stopDrawing);
+
+            paintCanvas.addEventListener('touchstart', startTouchDrawing);
+            paintCanvas.addEventListener('touchmove', drawTouchLine);
+            paintCanvas.addEventListener('touchend', stopTouchDrawing);
+
+            var download = function() {
+                var link = document.createElement('a');
+                link.download = 'filename.png';
+                link.href = paintCanvas.toDataURL()
+                link.click();
+            }
+
+            $('#download_canvas').on('click', download);
+
+            $(window).keypress(function(event) {
+                if (!(event.which == 115 && event.ctrlKey) && !(event.which == 19)) {
+                    download();
+                }
+
+                event.preventDefault();
+                return false;
             });
 
-            function makePoint(x, y) {
 
-                if (arguments.length <= 1) {
-                    y = x.y;
-                    x = x.x;
-                }
-
-                var v = new Two.Vector(x, y);
-                v.position = new Two.Vector().copy(v);
-
-                return v;
-
-            }
-
-            function createGrid(s) {
-
-                var size = s || 30;
-                var two = new Two({
-                    type: Two.Types.canvas,
-                    width: size,
-                    height: size
-                });
-
-                var a = two.makeLine(two.width / 2, 0, two.width / 2, two.height);
-                var b = two.makeLine(0, two.height / 2, two.width, two.height / 2);
-                a.stroke = b.stroke = '#6dcff6';
-
-                two.update();
-
-                $('#drawing_box').css({
-                    //                    background: 'url(' + two.renderer.domElement.toDataURL('image/png') + ') 0 0 repeat',
-                    //                    backgroundSize: size + 'px ' + size + 'px'
-                    backgroundColor: 'yellow'
-                });
-
-            }
 
         });
 
