@@ -6,6 +6,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <style>
+        @font-face {
+            font-family: card_font;
+            src: url('fonts/Tiempos/TiemposHeadline-Medium.ttf');
+        }
+
         body {
             margin: 0;
             display: flex;
@@ -30,22 +35,32 @@
 
 <body>
 
-    <canvas class="js-paint paint-canvas" width="600" height="300"></canvas>
+    <canvas class="js-paint paint-canvas" width="600" height="350"></canvas>
 
     <button id="download_canvas">download</button>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script>
-        $(function() {
+        $(window).on('load', function() {
 
             const paintCanvas = document.querySelector('.js-paint');
             const context = paintCanvas.getContext('2d');
             context.lineCap = 'round';
             context.lineWidth = 50;
-            context.fillStyle = "#ff0000";
+            context.fillStyle = "#ffec01";
             context.fillRect(0, 0, paintCanvas.width, paintCanvas.height);
             context.strokeStyle = "#fff";
+            context.font = 'bold 25px card_font';
+            context.fillStyle = '#000';
+            context.fillText("Urvi Raghbeer-", 40, 40 + 25);
+            context.fillText("Graphic & UIUX designer. Entrepreneur", 40, 40 + 25 + 25 + 30);
+            context.fillText("All things design, technology and business.", 40, 40 + 25 + 25 + 30 + 30);
+            context.fillText("Founder & CEO of Outboxy and Welly.", 40, 40 + 25 + 25 + 30 + 30 + 30);
+            context.fillText("Favourite glyph-em dash.", 40, 40 + 25 + 25 + 30 + 30 + 30 + 30);
+            context.font = 'bold 15px card_font';
+            context.fillText("Linkedin", 40, 40 + 25 + 25 + 30 + 30 + 30 + 30 + 15 + 70);
+            context.fillText('Hit "S" to save ', 450, 40 + 25 + 25 + 30 + 30 + 30 + 30 + 15 + 70);
 
             var canvasIsFilled = false;
 
@@ -59,6 +74,37 @@
                 y = 0;
             let isMouseDown = false;
             let isTouchDown = false;
+
+
+            function getFilledInPixels(stride) {
+                if (!stride || stride < 1) {
+                    stride = 1;
+                }
+
+                var pixels = context.getImageData(0, 0, paintCanvas.width, paintCanvas.height),
+                    pdata = pixels.data,
+                    l = pdata.length,
+                    total = (l / stride),
+                    count = 0;
+
+                // Iterate over all pixels
+                for (var i = count = 0; i < l; i += stride) {
+                    if (parseInt(pdata[i]) === 0) {
+                        count++;
+                    }
+                }
+
+                console.log(Math.round((count / total) * 100));
+                return Math.round((count / total) * 100);
+            }
+
+            function handlePercentage(filledInPixels) {
+                filledInPixels = filledInPixels || 0;
+                console.log(filledInPixels + '%');
+                if (filledInPixels > 50) {
+                    //                    canvas.parentNode.removeChild(canvas);
+                }
+            }
 
             const stopDrawing = () => {
                 isMouseDown = false;
@@ -93,6 +139,7 @@
                     x = newX;
                     y = newY;
                 }
+                handlePercentage(getFilledInPixels(80));
             }
 
             const stopTouchDrawing = () => {
@@ -117,6 +164,7 @@
                     x = newX;
                     y = newY;
                 }
+                handlePercentage(getFilledInPixels(80));
             }
 
             paintCanvas.addEventListener('mousedown', startDrawing);
@@ -145,9 +193,6 @@
                 event.preventDefault();
                 return false;
             });
-
-
-
         });
 
     </script>
