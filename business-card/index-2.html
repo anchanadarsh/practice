@@ -1,29 +1,27 @@
 <html><head>
     <title>Urvi Raghbeer</title>
-    <link rel="shortcut icon" type="image/x-icon" href="http://tingtingting.in/projects/practice/projects/business-card/favicon.png"/>
+    <link rel="shortcut icon" type="image/x-icon" href="http://tingtingting.in/projects/practice/projects/business-card/favicon.png">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
-        <meta name="description" content="Graphic & UIUX designer. Entrepreneur. All things design, technology and business. Founder & CEO of Outboxy and Welly.">
+        <meta name="description" content="Graphic &amp; UIUX designer. Entrepreneur. All things design, technology and business. Founder &amp; CEO of Outboxy and Welly.">
 
     <meta name="keywords" content="UIUX, UIUX design, Urvi Raghbeer, Welly, Outboxy, Graphic, Entrepreneur">
     
-    <meta property="og:type" content="website"/>
-    <meta property="og:url" content="https://www.urviraghbeer.com/"/>
-    <meta property="og:title" content="Urvi Raghbeer"/>
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.urviraghbeer.com/">
+    <meta property="og:title" content="Urvi Raghbeer">
     
-    <meta property="og:description"
-          content="Graphic & UIUX designer. Entrepreneur. All things design, technology and business. Founder & CEO of Outboxy and Welly."/>
-    <meta property="og:image" content="http://tingtingting.in/projects/practice/projects/business-card/og-image.jpg"/>
+    <meta property="og:description" content="Graphic &amp; UIUX designer. Entrepreneur. All things design, technology and business. Founder &amp; CEO of Outboxy and Welly.">
+    <meta property="og:image" content="http://tingtingting.in/projects/practice/projects/business-card/og-image.jpg">
 
     
-    <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:description"
-          content="Graphic & UIUX designer. Entrepreneur. All things design, technology and business. Founder & CEO of Outboxy and Welly."/>
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="Graphic &amp; UIUX designer. Entrepreneur. All things design, technology and business. Founder &amp; CEO of Outboxy and Welly.">
     
-    <meta name="twitter:title" content="Urvi Raghbeer"/>
-    <meta name="twitter:site" content="https://www.urviraghbeer.com/"/>
-    <meta name="twitter:image" content="http://tingtingting.in/projects/practice/projects/business-card/og-image.jpg"/>
+    <meta name="twitter:title" content="Urvi Raghbeer">
+    <meta name="twitter:site" content="https://www.urviraghbeer.com/">
+    <meta name="twitter:image" content="http://tingtingting.in/projects/practice/projects/business-card/og-image.jpg">
     <style>
         @font-face {
             font-family: card_font;
@@ -32,6 +30,10 @@
         html{
             width: 100vw;
             overflow: hidden;
+            height: 100%;
+    overflow: hidden;
+    width: 100%;
+    position: fixed;
         }
 
         body {
@@ -39,6 +41,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
+            height: 100%;
+    overflow: hidden;
+    width: 100%;
+    position: fixed;
         }
 
         #drawing_box {
@@ -56,6 +63,11 @@
             position: relative;
             width: 100%;
             height: 100%;
+            overflow: hidden;
+            height: 100%;
+    overflow: hidden;
+    width: 100%;
+    position: fixed;
             /* margin: 1rem; */
         }
         .text-container{
@@ -114,6 +126,19 @@
             content:"Favourite glyph-em dash.";
             top: calc(40vh + 150px);
         }
+        @media(min-width:1600px){
+            .short_detail_two::after{
+            top: calc(40vh + 7vh);
+        }
+        .short_detail_three::after{
+            top: calc(40vh + 14vh);
+        }
+        .short_detail_four::after{
+            top: calc(40vh + 21vh);
+        }
+        .linkedin::after, .sve::after{top: calc(40vh + 32vh)  !important;}
+        }
+
         .linkedin::after{
             content:"Linkedin";
             color:#000;
@@ -171,29 +196,46 @@
         .short_detail_one::after, .short_detail_two::after,
         .short_detail_three::after, .short_detail_four::after,
         .linkedin::after, .sve::after, .name::after{
-            font-size:4vw;
+            font-size:6vw;
             left: 5vw;
         } 
-        .linkedin::after, .sve::after{font-size: 3vw !important;top: calc(40vh + 160px);}
-        .sve::after, .ref::after{left: 70vw}
+        .linkedin::after, .sve::after{font-size: 3vw !important;top: calc(35vh + 280px);}
+        .sve::after, .ref::after{left: 60vw; display:none}
         .ref::after{font-size: 3vw !important;top:5vh}
+
         .short_detail_one::after{
-            top: 40vh;
+            content:"Graphic & \A UIUX designer. \A Entrepreneur";
+            white-space: pre;
+            line-height: normal;
+            top: 20vh;
         }
         .short_detail_two::after{
-            top: calc(40vh + 30px);
+            content:"All things \A design, \A technology \A and business.";
+            white-space: pre;
+            line-height: normal;
+            top: calc(20vh + 85px);
         }
         .short_detail_three::after{
-            top: calc(40vh + 60px);
+            content:"Founder & CEO \A of Outboxy \A and Welly.";
+            white-space: pre;
+            line-height: normal;
+            top: calc(20vh + 195px);
         }
         .short_detail_four::after{
-            top: calc(40vh + 90px);
+            content:"Favourite \A glyph-em dash.";
+            white-space: pre;
+            line-height: normal;
+            top: calc(20vh + 280px);
         }
         .name::after{
-            top: calc(40vh - 60px);
+            content: "Urvi \A Raghbeer-" !important;
+            white-space: pre;
+            line-height: normal;
+            top: calc(20vh - 80px);
         }
 
         }
+        
 
     </style>
 
@@ -201,9 +243,9 @@
 
 <body data-new-gr-c-s-check-loaded="14.996.0" data-gr-ext-installed="">
     <div class="relative" id="mydiv">
-    <canvas class="js-paint paint-canvas" id="js-paint"></canvas>
-    <canvas id="blank"></canvas>
-    <canvas id="yellow"></canvas>
+    <canvas class="js-paint paint-canvas" id="js-paint" width="1366" height="667"></canvas>
+    <canvas id="blank" width="1366" height="667"></canvas>
+    <canvas id="yellow" width="1366" height="667"></canvas>
     <div class="text-container">
         <div class="name"></div>
         <div class="short_detail_one"></div>
@@ -519,7 +561,7 @@ function verifyColor(){
    if( x == "yellow")
        x = "white";
    else
-       x = "yellow";    
+       x = "red";    
   
 }
 
@@ -576,5 +618,5 @@ function findxy(res, e) {
 </script>
 
 
-</body>
-</html>
+
+</body></html>
