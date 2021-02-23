@@ -2,37 +2,32 @@
 
 <head>
     <title>Urvi Raghbeer</title>
-    <link rel="shortcut icon" type="image/x-icon" href="http://tingtingting.in/projects/practice/projects/business-card/favicon.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="http://tingtingting.in/projects/practice/projects/business-card/favicon.png">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
-    <meta name="description" content="Graphic & UIUX designer. Entrepreneur. All things design, technology and business. Founder & CEO of Outboxy and Welly.">
+    <meta name="description" content="Graphic &amp; UIUX designer. Entrepreneur. All things design, technology and business. Founder &amp; CEO of Outboxy and Welly.">
 
     <meta name="keywords" content="UIUX, UIUX design, Urvi Raghbeer, Welly, Outboxy, Graphic, Entrepreneur">
 
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.urviraghbeer.com/" />
-    <meta property="og:title" content="Urvi Raghbeer" />
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.urviraghbeer.com/">
+    <meta property="og:title" content="Urvi Raghbeer">
 
-    <meta property="og:description" content="Graphic & UIUX designer. Entrepreneur. All things design, technology and business. Founder & CEO of Outboxy and Welly." />
-    <meta property="og:image" content="http://tingtingting.in/projects/practice/projects/business-card/og-image.jpg" />
+    <meta property="og:description" content="Graphic &amp; UIUX designer. Entrepreneur. All things design, technology and business. Founder &amp; CEO of Outboxy and Welly.">
+    <meta property="og:image" content="http://tingtingting.in/projects/practice/projects/business-card/og-image.jpg">
 
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:description" content="Graphic & UIUX designer. Entrepreneur. All things design, technology and business. Founder & CEO of Outboxy and Welly." />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="Graphic &amp; UIUX designer. Entrepreneur. All things design, technology and business. Founder &amp; CEO of Outboxy and Welly.">
 
-    <meta name="twitter:title" content="Urvi Raghbeer" />
-    <meta name="twitter:site" content="https://www.urviraghbeer.com/" />
-    <meta name="twitter:image" content="http://tingtingting.in/projects/practice/projects/business-card/og-image.jpg" />
+    <meta name="twitter:title" content="Urvi Raghbeer">
+    <meta name="twitter:site" content="https://www.urviraghbeer.com/">
+    <meta name="twitter:image" content="http://tingtingting.in/projects/practice/projects/business-card/og-image.jpg">
     <style>
         @font-face {
             font-family: card_font;
             src: url('TiemposHeadline-Medium.ttf');
-        }
-
-        html {
-            width: 100vw;
-            overflow: hidden;
         }
 
         body {
@@ -40,254 +35,111 @@
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        #drawing_box {
-            width: 50vw;
-            height: 30vw;
+            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            position: fixed;
         }
 
         .paint-canvas {
-            /* border: 1px black solid; */
             display: block;
-
         }
 
-        .abc,
-        #blank,
-        #yellow {
+        .abc {
             display: none;
         }
 
         .relative {
-            position: relative;
-            width: 100%;
+            position: fixed;
+            overflow: hidden;
             height: 100%;
-            /* margin: 1rem; */
+            width: 100%;
         }
 
         .text-container {
-            /* width: 600px;
-            height:350px; */
-            display: grid;
-            align-items: center;
-            margin: 1rem;
             position: absolute;
             top: 0;
             left: 0;
+            width: 100%;
+            height: 100%;
+            font-family: card_font;
+            display: flex;
+            justify-content: center;
+            pointer-events: none;
+            padding: 5vmin;
+            box-sizing: border-box;
+        }
+
+        .text-container_inner {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        .card_name {
+            font-size: 10vmin;
+            margin: 0;
+            line-height: 1.1;
             font-family: card_font;
         }
 
-        .short_detail,
-        .name {
+        .card_desc {
+            font-size: 6vmin;
+            margin: 5vmin 0;
+            line-height: 1.4;
+            font-family: card_font;
+            font-weight: bold;
+        }
+
+        .linkedin {
+            color: black;
+            text-decoration: none;
+            font-family: card_font;
+            font-weight: bold;
+            pointer-events: visible;
+            font-size: 2.5vmin;
+            align-self: flex-start;
+        }
+
+        .save_refresh {
             position: absolute;
+            width: 100%;
             top: 0;
-
-        }
-
-        .name::after {
-            content: "Urvi Raghbeer-";
-            position: absolute;
-            top: calc(40vh - 100px);
-            left: 20vw;
-            font-size: 4vw;
-            font-weight: bold;
-            line-height: 0;
-            width: 100vw;
-            pointer-events: none;
-        }
-
-        .short_detail_one,
-        .short_detail_two {
-            position: absolute;
-        }
-
-        .short_detail_one::after,
-        .short_detail_two::after,
-        .short_detail_three::after,
-        .short_detail_four::after,
-        .linkedin::after,
-        .sve::after,
-        .ref::after {
-            position: absolute;
-            font-size: 3vw;
-            font-weight: bold;
-            line-height: 0;
-            width: 100vw;
+            transform: translateY(-100%);
             display: flex;
-            pointer-events: none;
-            left: 20vw;
+            justify-content: space-between;
         }
 
-        .short_detail_one::after {
-            content: "Graphic & UIUX designer. Entrepreneur";
-            top: 40vh;
+        .save_canvas {
+            color: black;
+            font-family: card_font;
+            font-weight: bold;
+            font-size: 2.5vmin;
         }
 
-        .short_detail_two::after {
-            content: "All things design, technology and business.";
-            top: calc(40vh + 50px);
+        .reload_canvas {
+            color: black;
+            font-family: card_font;
+            font-weight: bold;
+            font-size: 2.5vmin;
         }
 
-        .short_detail_three::after {
-            content: "Founder & CEO of Outboxy and Welly.";
-            top: calc(40vh + 100px);
-        }
-
-        .short_detail_four::after {
-            content: "Favourite glyph-em dash.";
-            top: calc(40vh + 150px);
-        }
-
-        .linkedin::after {
-            content: "Linkedin";
-            color: #000;
-            top: calc(40vh + 250px);
-            font-size: 1vw;
-            pointer-events: all;
-            cursor: pointer;
-        }
-
-        .sve::after {
-            content: "Hit \"S\" to save";
-            top: calc(40vh + 250px);
-            left: calc(63vw);
-            font-size: 1vw;
-        }
-
-        .sve.remove,
-        .ref.remove {
-            display: none;
-        }
-
-        .ref::after {
-            position: absolute;
-            content: "Hit \"R\" to refresh";
-            top: 0;
-            right: 0;
-            left: calc(63vw);
-            font-size: 1vw;
-
-        }
-
-        @media(max-width:1024px) and (min-width:769px) {
-
-            .short_detail_one,
-            .short_detail_two {
-                position: absolute;
+        @media (orientation:portrait) {
+            .card_desc {
+                margin: 10vmin 0;
             }
 
-            .short_detail_one::after,
-            .short_detail_two::after,
-            .short_detail_three::after,
-            .short_detail_four::after,
-            .linkedin::after,
-            .sve::after,
-            .name::after {
-                font-size: 3vw;
-                left: 20vw;
-            }
-
-            .linkedin::after,
-            .sve::after,
-            .ref::after {
-                font-size: 2vw !important;
-            }
-
-            .sve::after,
-            .ref::after {
-                left: 70vw
-            }
-
-            .ref::after {
-                top: 10vh
+            .text-container {
+                padding-right: 30vmin;
             }
         }
 
-        @media(max-width:768px) and (min-width:501px) {
-
-            .short_detail_one,
-            .short_detail_two {
-                position: absolute;
+        /* media query for touch devices*/
+        @media only screen and (hover: none) {
+            .save_refresh {
+                visibility: hidden;
             }
-
-            .short_detail_one::after,
-            .short_detail_two::after,
-            .short_detail_three::after,
-            .short_detail_four::after,
-            .linkedin::after,
-            .sve::after,
-            .name::after {
-                font-size: 4vw;
-                left: 5vw;
-            }
-
-            .linkedin::after,
-            .sve::after,
-            .ref::after {
-                font-size: 3vw !important;
-            }
-
-            .sve::after,
-            .ref::after {
-                left: 70vw
-            }
-        }
-
-        @media(max-width:500px) {
-
-            .short_detail_one,
-            .short_detail_two {
-                position: absolute;
-            }
-
-            .short_detail_one::after,
-            .short_detail_two::after,
-            .short_detail_three::after,
-            .short_detail_four::after,
-            .linkedin::after,
-            .sve::after,
-            .name::after {
-                font-size: 4vw;
-                left: 5vw;
-            }
-
-            .linkedin::after,
-            .sve::after {
-                font-size: 3vw !important;
-                top: calc(40vh + 160px);
-            }
-
-            .sve::after,
-            .ref::after {
-                left: 70vw
-            }
-
-            .ref::after {
-                font-size: 3vw !important;
-                top: 5vh
-            }
-
-            .short_detail_one::after {
-                top: 40vh;
-            }
-
-            .short_detail_two::after {
-                top: calc(40vh + 30px);
-            }
-
-            .short_detail_three::after {
-                top: calc(40vh + 60px);
-            }
-
-            .short_detail_four::after {
-                top: calc(40vh + 90px);
-            }
-
-            .name::after {
-                top: calc(40vh - 60px);
-            }
-
         }
 
     </style>
@@ -297,19 +149,23 @@
 <body data-new-gr-c-s-check-loaded="14.996.0" data-gr-ext-installed="">
     <div class="relative" id="mydiv">
         <canvas class="js-paint paint-canvas" id="js-paint"></canvas>
-        <canvas id="blank"></canvas>
-        <canvas id="yellow"></canvas>
         <div class="text-container">
-            <div class="name"></div>
-            <div class="short_detail_one"></div>
-            <div class="short_detail_two"></div>
-            <div class="short_detail_three"></div>
-            <div class="short_detail_four"></div>
-            <div class="bottom_part">
-                <a class="linkedin" href="https://www.linkedin.com/in/urviraghbeer" target="_blank"></a>
-                <div class="sve"></div>
-                <div class="ref"></div>
+
+            <div class="text-container_inner">
+                <div class="save_refresh">
+                    <span class="save_canvas">Hit "S" to save</span>
+                    <span class="reload_canvas">Hit "R" to refresh</span>
+                </div>
+                <h2 class="card_name">Urvi Raghbeer -</h2>
+                <p class="card_desc">
+                    Graphic & UIUX designer. Entrepreneur <br>
+                    All things design, technology and business. <br>
+                    Founder & CEO of Outboxy and Welly. <br>
+                    Favourite glyph-em dash.
+                </p>
+                <a class="linkedin" href="https://www.linkedin.com/in/urviraghbeer" target="_blank">Linkedin</a>
             </div>
+
         </div>
     </div>
 
@@ -318,7 +174,8 @@
     <!-- <button id="download_canvas">download</button> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.4.6/processing.min.js" integrity="sha512-qs0N4ld6hTj4OctCxV59EzJ6dVXQZIuP0BARqBOlY9bxquJzwwcLuBeEyvC8WqkuKK7zfb0rgZ2PW3IvAXocJw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.4.6/processing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 
     <script>
         $(window).on('load', function() {
@@ -328,92 +185,71 @@
             paintCanvas.height = window.innerHeight;
             const context = paintCanvas.getContext('2d');
             context.lineCap = 'round';
-            context.lineWidth = 120;
+            context.lineWidth = 100;
             context.fillStyle = "#ffffff";
             context.fillRect(0, 0, paintCanvas.width, paintCanvas.height);
             context.strokeStyle = "#ffec01";
-            //context.font = 'bold 25px card_font';
-            //context.fillStyle = '#000';
-            //context.fillText("Urvi Raghbeer-", 40, 40 + 25);
-            //context.fillText("Graphic & UIUX designer. Entrepreneur", 40, 40 + 25 + 25 + 30);
-            //context.fillText("All things design, technology and business.", 40, 40 + 25 + 25 + 30 + 30);
-            //context.fillText("Founder & CEO of Outboxy and Welly.", 40, 40 + 25 + 25 + 30 + 30 + 30);
-            //context.fillText("Favourite glyph-em dash.", 40, 40 + 25 + 25 + 30 + 30 + 30 + 30);
-            //context.font = 'bold 15px card_font';
-            //context.fillText("Linkedin", 40, 40 + 25 + 25 + 30 + 30 + 30 + 30 + 15 + 70);
-            //context.fillText('Hit "S" to save ', 450, 40 + 25 + 25 + 30 + 30 + 30 + 30 + 15 + 70);
+
+            var color1_Val = 236;
+            var color2_Val = 237;
 
             var canvasIsFilled = false;
-
-            function rgbToHex(r, g, b) {
-                if (r > 255 || g > 255 || b > 255)
-                    throw "Invalid color component";
-                return ((r << 16) | (g << 8) | b).toString(16);
-            }
 
             let x = 0,
                 y = 0;
             let isMouseDown = false;
             let isTouchDown = false;
 
-
             function getFilledInPixels(stride) {
                 if (!stride || stride < 1) {
                     stride = 1;
                 }
-                //console.log(stride);
-                // var pixels = context.getImageData(0, 0, paintCanvas.width, paintCanvas.height),
-                //     pdata = pixels.data,
-                //     l = pdata.length,
-                //     total = (l / stride),
-                //     count = 0;
+                var pixels = context.getImageData(0, 0, paintCanvas.width, paintCanvas.height),
+                    pdata = pixels.data,
+                    l = pdata.length,
+                    total = (l / stride),
+                    count = 0;
 
-                // // Iterate over all pixels
-                // for (var i = count = 0; i < l; i += stride) {
-                //     if (parseInt(pdata[i]) === 0) {
-                //         count++;
-                //     }
-                // }
+                // Iterate over all pixels
+                for (var i = 0; i < l; i++) {
+                    if (parseInt(pdata[i]) === color1_Val || parseInt(pdata[i]) === color2_Val) {
+                        count++;
+                    }
+                }
 
-                //console.log(Math.round((count / total) * 100));
-                //return Math.round((count / total) * 100);
+                if (color1_Val == 255) {
+                    return Math.round((count / l) * 100);
+                } else {
+                    return Math.round((count * 3 / l) * 100);
+                }
             }
 
-            // function handlePercentage(filledInPixels) {
-            //     filledInPixels = filledInPixels || 0;
-            //     //console.log(filledInPixels + '%');
-            //     if (filledInPixels > 50) {
-            //         //                    canvas.parentNode.removeChild(canvas);
-            //     }
-            // }
+            function handlePercentage(filledInPixels) {
+                filledInPixels = filledInPixels || 0;
 
+                if (color1_Val == 236) {
+                    if (filledInPixels > 70) {
+                        context.fillStyle = "#ffec01";
+                        context.fillRect(0, 0, paintCanvas.width, paintCanvas.height);
+                        context.strokeStyle = "#ffffff";
+                        color1_Val = 255;
+                        color2_Val = 255;
+                    }
+                } else if (color1_Val == 255) {
+                    if (filledInPixels > 98) {
+                        context.fillStyle = "#ffffff";
+                        context.fillRect(0, 0, paintCanvas.width, paintCanvas.height);
+                        context.strokeStyle = "#ffec01";
+                        color1_Val = 236;
+                        color2_Val = 237;
+                    }
+                }
+            }
 
             const stopDrawing = () => {
                 isMouseDown = false;
-
-
-                //    for (var i = 0; i <= paintCanvas.height; i++) {
-                //        for (var j = 0; j <= paintCanvas.width; j++) {
-                //            var p = context.getImageData(j, i, 1, 1).data;
-                //            var white = "#" + ("000000" + rgbToHex(p[0], p[1], p[2])).slice(-6);
-                //            if (white == '#000000') {
-                //                canvasIsFilled = true;
-                //            }
-                //        }
-                //    }
-                //    if (canvasIsFilled) {
-                //        console.log('canvas is not filled');
-                //    }
-                //    else{
-                //     console.log('yes');
-                //    }
-
-
-
+                handlePercentage(getFilledInPixels(100));
             }
-
-
-
             const startDrawing = event => {
                 isMouseDown = true;
                 [x, y] = [event.offsetX, event.offsetY];
@@ -431,11 +267,12 @@
                     x = newX;
                     y = newY;
                 }
-                //handlePercentage(getFilledInPixels(100));
+
             }
 
             const stopTouchDrawing = () => {
                 isTouchDown = false;
+                handlePercentage(getFilledInPixels(100));
             }
             const startTouchDrawing = event => {
                 //console.log(event)
@@ -456,7 +293,6 @@
                     x = newX;
                     y = newY;
                 }
-                handlePercentage(getFilledInPixels(100));
             }
 
             paintCanvas.addEventListener('mousedown', startDrawing);
@@ -468,43 +304,10 @@
             paintCanvas.addEventListener('touchmove', drawTouchLine);
             paintCanvas.addEventListener('touchend', stopTouchDrawing);
 
-
-            canvass = document.getElementById('blank');
-            canvass.width = window.innerWidth;
-            canvass.height = window.innerHeight;
-            ctxx = canvass.getContext('2d');
-            ctxx.fillStyle = "#ffec01";
-            ctxx.fillRect(0, 0, canvass.width, canvass.height);
-
-            yellow = document.getElementById('yellow');
-            yellow.width = window.innerWidth;
-            yellow.height = window.innerHeight;
-            ctxxx = yellow.getContext('2d');
-            ctxxx.fillStyle = "#ffffff";
-            ctxxx.fillRect(0, 0, yellow.width, yellow.height);
-
-
-            document.getElementById('js-paint').addEventListener('click', function() {
-                if (paintCanvas.toDataURL() == canvass.toDataURL()) {
-                    console.log('white');
-                    context.strokeStyle = "#ffffff";
-                } else if (paintCanvas.toDataURL() == yellow.toDataURL()) {
-                    console.log('yellow');
-                    context.strokeStyle = "#ffec01";
-                } else {
-                    console.log('nothing');
-                }
-            });
-
         });
 
-    </script>
 
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
-
-    <script>
+        //download png
         $('body').bind('keypress', function(e) {
             if (e.keyCode == 115) {
                 var sve = $('.sve');
@@ -521,7 +324,6 @@
                         document.getElementById('image').appendChild(canvas);
                         var data = canvas.toDataURL('image/png');
                         canvas.className = "abc";
-
                     }
                 });
 
@@ -538,8 +340,7 @@
             }
         });
 
-
-
+        //refresh canvas
         $('body').bind('keypress', function(e) {
             if (e.keyCode == 114) {
                 window.location.reload();
@@ -547,6 +348,7 @@
         });
 
     </script>
+
 
 
 </body>
