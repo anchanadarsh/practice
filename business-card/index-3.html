@@ -371,7 +371,8 @@
     <!-- <button id="download_canvas">download</button> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.4.6/processing.min.js" integrity="sha512-qs0N4ld6hTj4OctCxV59EzJ6dVXQZIuP0BARqBOlY9bxquJzwwcLuBeEyvC8WqkuKK7zfb0rgZ2PW3IvAXocJw==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.4.6/processing.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 
     <script>
         $(window).on('load', function() {
@@ -391,17 +392,10 @@
 
             var canvasIsFilled = false;
 
-            function rgbToHex(r, g, b) {
-                if (r > 255 || g > 255 || b > 255)
-                    throw "Invalid color component";
-                return ((r << 16) | (g << 8) | b).toString(16);
-            }
-
             let x = 0,
                 y = 0;
             let isMouseDown = false;
             let isTouchDown = false;
-
 
             function getFilledInPixels(stride) {
                 if (!stride || stride < 1) {
@@ -451,14 +445,10 @@
                 }
             }
 
-
             const stopDrawing = () => {
                 isMouseDown = false;
                 handlePercentage(getFilledInPixels(100));
             }
-
-
-
             const startDrawing = event => {
                 isMouseDown = true;
                 [x, y] = [event.offsetX, event.offsetY];
@@ -513,42 +503,10 @@
             paintCanvas.addEventListener('touchmove', drawTouchLine);
             paintCanvas.addEventListener('touchend', stopTouchDrawing);
 
-
-            canvass = document.getElementById('blank');
-            canvass.width = window.innerWidth;
-            canvass.height = window.innerHeight;
-            ctxx = canvass.getContext('2d');
-            ctxx.fillStyle = "#ffec01";
-            ctxx.fillRect(0, 0, canvass.width, canvass.height);
-
-            yellow = document.getElementById('yellow');
-            yellow.width = window.innerWidth;
-            yellow.height = window.innerHeight;
-            ctxxx = yellow.getContext('2d');
-            ctxxx.fillStyle = "#ffffff";
-            ctxxx.fillRect(0, 0, yellow.width, yellow.height);
-
-            //            $("#js-paint").bind("click touchstart", function() {
-            //                //                console.log(paintCanvas.toDataURL())
-            //                //                console.log(canvass.toDataURL())
-            //                if (paintCanvas.toDataURL() == canvass.toDataURL()) {
-            //                    console.log('white');
-            //                    context.strokeStyle = "#ffffff";
-            //                } else(paintCanvas.toDataURL() == yellow.toDataURL()) {
-            //                    console.log('yellow');
-            //                    context.strokeStyle = "#ffec01";
-            //                }
-            //            });
-
         });
 
-    </script>
 
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js" integrity="sha512-s/XK4vYVXTGeUSv4bRPOuxSDmDlTedEpMEcAQk0t/FMd9V6ft8iXdwSBxV0eD60c6w/tjotSlKu9J2AAW1ckTA==" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-
-    <script>
+        //download png
         $('body').bind('keypress', function(e) {
             if (e.keyCode == 115) {
                 var sve = $('.sve');
@@ -581,8 +539,7 @@
             }
         });
 
-
-
+        //refresh canvas
         $('body').bind('keypress', function(e) {
             if (e.keyCode == 114) {
                 window.location.reload();
