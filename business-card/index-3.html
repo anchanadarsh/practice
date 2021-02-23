@@ -351,9 +351,7 @@
 
 <body data-new-gr-c-s-check-loaded="14.996.0" data-gr-ext-installed="">
     <div class="relative" id="mydiv">
-        <canvas class="js-paint paint-canvas" id="js-paint" width="1366" height="667"></canvas>
-        <canvas id="blank" width="1366" height="667"></canvas>
-        <canvas id="yellow" width="1366" height="667"></canvas>
+        <canvas class="js-paint paint-canvas" id="js-paint"></canvas>
         <div class="text-container">
             <div class="name"></div>
             <div class="short_detail_one"></div>
@@ -421,23 +419,29 @@
                         count++;
                     }
                 }
-                console.log(Math.round((count * 3 / l) * 100))
-
-                return Math.round((count * 3 / l) * 100);
+                console.log(color1_Val);
+                if (color1_Val == 255) {
+                    console.log(Math.round((count / l) * 100))
+                    return Math.round((count / l) * 100);
+                } else {
+                    console.log(Math.round((count * 3 / l) * 100))
+                    return Math.round((count * 3 / l) * 100);
+                }
             }
 
             function handlePercentage(filledInPixels) {
                 filledInPixels = filledInPixels || 0;
-                //console.log(filledInPixels + '%');
-                if (filledInPixels > 70) {
-                    //                    canvas.parentNode.removeChild(canvas);
-                    if (color1_Val == 236) {
+
+                if (color1_Val == 236) {
+                    if (filledInPixels > 70) {
                         context.fillStyle = "#ffec01";
                         context.fillRect(0, 0, paintCanvas.width, paintCanvas.height);
                         context.strokeStyle = "#ffffff";
                         color1_Val = 255;
                         color2_Val = 255;
-                    } else {
+                    }
+                } else if (color1_Val == 255) {
+                    if (filledInPixels > 98) {
                         context.fillStyle = "#ffffff";
                         context.fillRect(0, 0, paintCanvas.width, paintCanvas.height);
                         context.strokeStyle = "#ffec01";
