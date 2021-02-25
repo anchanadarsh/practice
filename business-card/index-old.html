@@ -64,29 +64,10 @@
             height: 100%;
             font-family: card_font;
             display: flex;
-            /*justify-content: center;*/
+            justify-content: center;
             pointer-events: none;
-            padding: 5vmin 25vmin;
+            padding: 5vmin;
             box-sizing: border-box;
-        }
-
-        @media (max-width: 789px) {
-            .text-container {
-                padding: 5vmin 8vmin;
-            }
-
-            .name-hyphen {
-                position: relative;
-                top: 5px;
-            }
-
-            .linkedin {
-                font-size: 4.5vmin !important;
-            }
-
-            .save_button {
-                display: none;
-            }
         }
 
         .text-container_inner {
@@ -94,7 +75,6 @@
             flex-direction: column;
             justify-content: center;
             position: relative;
-            user-select: none;
         }
 
         .card_name {
@@ -106,7 +86,7 @@
 
         .card_desc {
             font-size: 6vmin;
-            margin: 10vmin 0 20vmin 0;
+            margin: 5vmin 0;
             line-height: 1.4;
             font-family: card_font;
             font-weight: bold;
@@ -120,12 +100,6 @@
             pointer-events: visible;
             font-size: 2.5vmin;
             align-self: flex-start;
-            border-bottom: 1px solid black;
-        }
-
-        .save_linkedin {
-            display: flex;
-            justify-content: space-between;
         }
 
         .save_refresh {
@@ -149,23 +123,6 @@
             font-family: card_font;
             font-weight: bold;
             font-size: 2.5vmin;
-        }
-
-        .welly {
-            color: black;
-            text-decoration: none;
-            font-family: card_font;
-            font-weight: bold;
-            pointer-events: visible;
-            font-size: 6vmin;
-            border-bottom: 2px solid black;
-            align-self: flex-start;
-        }
-
-        .hyphen {
-            position: relative;
-            top: 6px;
-
         }
 
         @media (orientation:portrait) {
@@ -195,20 +152,18 @@
         <div class="text-container">
 
             <div class="text-container_inner">
-                <!-- <div class="save_refresh">
+                <div class="save_refresh">
+                    <span class="save_canvas">Hit "S" to save</span>
                     <span class="reload_canvas">Hit "R" to refresh</span>
-                </div> -->
-                <h2 class="card_name">Urvi Raghbeer <span><img class="name-hyphen" src="substract.svg" width="40px"></span></h2>
+                </div>
+                <h2 class="card_name">Urvi Raghbeer -</h2>
                 <p class="card_desc">
                     Graphic & UIUX designer. Entrepreneur <br>
                     All things design, technology and business. <br>
-                    Founder of <a class="welly" href="https://welly.in/" target="_blank">Welly</a>. <br>
-                    Favourite glyph <span><img class="hyphen" src="substract.svg" width="30px"></span> em dash.
+                    Founder & CEO of Outboxy and Welly. <br>
+                    Favourite glyph-em dash.
                 </p>
-                <div class="save_linkedin">
-                    <div class="linkedin_button"><a class="linkedin" href="https://www.linkedin.com/in/urviraghbeer" target="_blank">Linkedin</a></div>
-                    <div class="save_button"><span class="save_canvas">Hit "S" to save</span></div>
-                </div>
+                <a class="linkedin" href="https://www.linkedin.com/in/urviraghbeer" target="_blank">Linkedin</a>
             </div>
 
         </div>
