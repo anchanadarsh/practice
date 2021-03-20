@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <style>
+        .custom_popup {
+            position: fixed;
+            height: 100vh;
+            width: 100%;
+            left: 0;
+            top: 0;
+            background-color: black;
+            color: white;
+            display: none;
+
+        }
+
+        .custom_popup.open {
+            display: block;
+
+        }
+
+        .close {
+            padding: 10px 30px;
+            background-color: white;
+            color: black;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <button class="open_popup" data-popup=".custom_popup1">open popup 1</button>
+    <button class="open_popup" data-popup=".custom_popup2">open popup 2</button>
+    <button class="open_popup" data-popup=".custom_popup3">open popup 3</button>
+
+    <div class="custom_popup custom_popup1">
+        <div class="close">Close</div>
+        <div class="custom_popup_inner">
+            Custom Popup 1
+        </div>
+    </div>
+
+    <div class="custom_popup custom_popup2">
+        <div class="close">Close</div>
+        <div class="custom_popup_inner">
+            Custom Popup 2
+        </div>
+    </div>
+
+    <div class="custom_popup custom_popup3">
+        <div class="close">Close</div>
+        <div class="custom_popup_inner">
+            Custom Popup 3
+        </div>
+    </div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.open_popup').on('click', function() {
+            var getPopup = $(this).attr('data-popup');
+            $(getPopup).addClass('open');
+        })
+        $('.close').on('click', function() {
+            $(this).parent('.custom_popup').removeClass('open');
+        })
+    })
+
+</script>
+
+</html>
