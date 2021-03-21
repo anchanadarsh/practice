@@ -66,13 +66,36 @@
             display: flex;
             /*justify-content: center;*/
             pointer-events: none;
-            padding: 5vmin 25vmin;
+            padding: 5vmin 22vmin;
             box-sizing: border-box;
+        }
+
+        .only-mobile {
+            display: none;
+        }
+
+        .save-container {
+            display: grid;
+            align-items: flex-end;
+            margin-bottom: 60px;
+            margin-left: 50px;
         }
 
         @media (max-width: 789px) {
             .text-container {
                 padding: 5vmin 8vmin;
+            }
+
+            .only-mobile {
+                display: none;
+            }
+
+            .only-desktop {
+                display: block;
+            }
+
+            .only-lg-screen {
+                display: none;
             }
 
             .name-hyphen {
@@ -81,11 +104,47 @@
             }
 
             .linkedin {
-                font-size: 4.5vmin !important;
+                font-size: 20px !important;
             }
 
             .save_button {
                 display: none;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .text-container {
+                padding: 5vmin 8vmin;
+            }
+
+            .only-desktop {
+                display: none;
+            }
+
+            .only-lg-screen {
+                display: none;
+            }
+
+            .only-mobile {
+                display: block;
+            }
+
+            .name-hyphen {
+                position: relative;
+                top: 5px;
+            }
+
+            .linkedin {
+                font-size: 10px !important;
+            }
+
+            .save_button {
+                display: none;
+            }
+
+            .welly {
+                font-size: 20px !important;
+                line-height: 28px !important;
             }
         }
 
@@ -104,10 +163,18 @@
             font-family: card_font;
         }
 
-        .card_desc {
-            font-size: 6vmin;
+        .card_desc_desktop {
+            font-size: 35px;
             margin: 10vmin 0 20vmin 0;
-            line-height: 1.4;
+            line-height: 49px;
+            font-family: card_font;
+            font-weight: bold;
+        }
+
+        .card_desc_mobile {
+            font-size: 20px;
+            margin: 10vmin 0 20vmin 0;
+            line-height: 28px;
             font-family: card_font;
             font-weight: bold;
         }
@@ -118,7 +185,7 @@
             font-family: card_font;
             font-weight: bold;
             pointer-events: visible;
-            font-size: 2.5vmin;
+            font-size: 20px;
             align-self: flex-start;
             border-bottom: 1px solid black;
         }
@@ -141,7 +208,7 @@
             color: black;
             font-family: card_font;
             font-weight: bold;
-            font-size: 2.5vmin;
+            font-size: 20px;
         }
 
         .reload_canvas {
@@ -157,24 +224,29 @@
             font-family: card_font;
             font-weight: bold;
             pointer-events: visible;
-            font-size: 6vmin;
+            font-size: 35px;
+            line-height: 49px;
             border-bottom: 2px solid black;
             align-self: flex-start;
         }
 
         .hyphen {
             position: relative;
-            top: 6px;
+            top: 4px;
 
         }
 
         @media (orientation:portrait) {
-            .card_desc {
+            .card_desc_desktop {
+                margin: 10vmin 0;
+            }
+
+            .card_desc_mobile {
                 margin: 10vmin 0;
             }
 
             .text-container {
-                padding-right: 30vmin;
+                padding-right: 0vmin;
             }
         }
 
@@ -198,19 +270,32 @@
                 <!-- <div class="save_refresh">
                     <span class="reload_canvas">Hit "R" to refresh</span>
                 </div> -->
-                <h2 class="card_name">Urvi Raghbeer <span><img class="name-hyphen" src="substract.svg" width="40px"></span></h2>
-                <p class="card_desc">
-                    Graphic & UIUX designer. Entrepreneur <br>
-                    All things design, technology and business. <br>
-                    Founder of <a class="welly" href="https://welly.in/" target="_blank">Welly</a>. <br>
-                    Favourite glyph <span><img class="hyphen" src="substract.svg" width="30px"></span> em dash.
+                <!-- <h2 class="card_name">Urvi Raghbeer <span><img class="name-hyphen" src="substract.svg" width="40px"></span></h2> -->
+                <p class="card_desc_desktop only-desktop">
+                    Urvi Raghbeer <span><img class="name-hyphen" src="substract.svg" width="35px"></span> <br> <br>
+                    Entrepreneur. <br>
+                    Graphic & UIUX designer. <br>
+                    Living in the user's shoes.<br>
+                    Founder & CEO at <a class="welly" href="https://welly.in/" target="_blank">Welly</a>. <br>
+                </p>
+                <p class="card_desc_mobile only-mobile">
+                    Urvi Raghbeer <span><img class="name-hyphen" src="substract.svg" width="25px"></span> <br> <br>
+                    Entrepreneur. <br>
+                    Graphic & <br>
+                    UIUX designer. <br>
+                    Living in the user's shoes.<br>
+                    Founder & CEO<br>
+                    at <a class="welly" href="https://welly.in/" target="_blank">Welly</a>. <br>
                 </p>
                 <div class="save_linkedin">
                     <div class="linkedin_button"><a class="linkedin" href="https://www.linkedin.com/in/urviraghbeer" target="_blank">Linkedin</a></div>
-                    <div class="save_button"><span class="save_canvas">Hit "S" to save</span></div>
+                    <!-- <div class="save_button"><span class="save_canvas">Hit "S" to save</span></div> -->
                 </div>
             </div>
 
+            <div class="save-container only-lg-screen">
+                <div class="linkedin_button"><span class="save_canvas  linkedin">Hit "S" to save</span></div>
+            </div>
         </div>
     </div>
 
@@ -225,12 +310,23 @@
     <script>
         $(window).on('load', function() {
 
+            var winH = window.outerHeight;
+            var winW = window.outerWidth;
+
+            var cursorWidth = 0.2 * winH;
+            // if (winH > winW) {
+            // var cursorWidth = 0.2 * winW;
+            // } else {
+            // var cursorWidth = 0.2 * winH;
+            // }
+
             const paintCanvas = document.querySelector('.js-paint');
             paintCanvas.width = window.innerWidth;
             paintCanvas.height = window.innerHeight;
             const context = paintCanvas.getContext('2d');
             context.lineCap = 'round';
-            context.lineWidth = 100;
+            //            context.lineWidth = 100;
+            context.lineWidth = cursorWidth;
             context.fillStyle = "#ffffff";
             context.fillRect(0, 0, paintCanvas.width, paintCanvas.height);
             context.strokeStyle = "#ffec01";
@@ -340,10 +436,14 @@
                 }
             }
 
-            paintCanvas.addEventListener('mousedown', startDrawing);
+            //            paintCanvas.addEventListener('mousedown', startDrawing);
+            //            paintCanvas.addEventListener('mouseup', stopDrawing);
+
             paintCanvas.addEventListener('mousemove', drawLine);
-            paintCanvas.addEventListener('mouseup', stopDrawing);
             paintCanvas.addEventListener('mouseout', stopDrawing);
+
+            paintCanvas.addEventListener('mouseover', startDrawing);
+            paintCanvas.addEventListener('mouseleave', stopDrawing);
 
             paintCanvas.addEventListener('touchstart', startTouchDrawing);
             paintCanvas.addEventListener('touchmove', drawTouchLine);
